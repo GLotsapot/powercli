@@ -1,3 +1,20 @@
+<#
+.SYNOPSIS
+Automate the creation and removal of snapshots in a VMWare enviroment
+
+.DESCRIPTION
+This script will allow the user to loop through multiple VMs on a server and create or delete snapshots; primarily used during server maintenance routines
+
+.EXAMPLE
+
+.NOTES
+AUTHORS
+Sawyer Peacock - OGELP SysAdmin
+
+FIXES
+Version 1.0
+Initial Commit
+#>
 Import-Module -Name "VMware.VimAutomation.Core"
 
 ############### Functions ############### 
