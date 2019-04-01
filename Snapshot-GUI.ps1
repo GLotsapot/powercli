@@ -30,7 +30,6 @@ function PromptEnviroment() {
     switch($opt)
     {
         0 { 
-        
             $Script:ServerName = "ONTORVMM02.BLACKJACK.GCGAMING.COM"
             $Script:VMListFile = "ServersProd.txt"
             }
@@ -63,14 +62,17 @@ $VMAction = $null
 PromptEnviroment
 PromptAction
 
-#TODO: Check if any of the variables are null and quit
-
-switch($VMAction)
-{
-    0 {
-        ./Snapshot-Management -ServerName $ServerName -VMListFile $VMListFile -Create
-    }
-    1 {
-        ./Snapshot-Management -ServerName $ServerName -VMListFile $VMListFile -Delete
-    }
+if ($ServerName -and $VMListFile -and $VMAction) {
+    switch($VMAction)
+    {
+        0 {
+            ./Snapshot-Management -ServerName $ServerName -VMListFile $VMListFile -Create
+        }
+        1 {
+            ./Snapshot-Management -ServerName $ServerName -VMListFile $VMListFile -Delete
+        }
+    }    
+}
+else {
+    Write-Warning -Message "Missing important values, so gettings a coffee while you figure it out"
 }

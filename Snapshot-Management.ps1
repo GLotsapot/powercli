@@ -3,7 +3,8 @@
 Automate the creation and removal of snapshots in a VMWare environment
 
 .DESCRIPTION
-This script will allow the user to loop through multiple VMs on a server and create or delete snapshots; primarily used during server maintenance routines
+This script will allow the user to loop through multiple VMs on a server and create or delete snapshots; primarily used during server maintenance routines.
+If both the delete and the create options are selected, it will delete all snapshots before creating new ones
 
 .PARAMETER ServerName
 Specifies the ESXi host or vSphere server to connect to
@@ -65,7 +66,13 @@ function SnapShotDelete() {
 $VMlist = Get-Content -Path:$VMListFile
 $vmserver = Connect-VIServer -Server $ServerName -Protocol https
 
-if ($Delete) { SnapShotDelete }
-if ($Create) { SnapShotCreate }
+if ($Delete) { 
+    Write-Host "[Deleting Snapshots]" -BackgroundColor Green -ForegroundColor Yellow
+    SnapShotDelete 
+    }
+if ($Create) { 
+    Write-Host "[Creating Snapshots]" -BackgroundColor Green -ForegroundColor Yellow
+    SnapShotCreate 
+    }
 
 Disconnect-VIServer -Confirm:$false
