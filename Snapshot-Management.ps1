@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-Automate the creation and removal of snapshots in a VMWare enviroment
+Automate the creation and removal of snapshots in a VMWare environment
 
 .DESCRIPTION
 This script will allow the user to loop through multiple VMs on a server and create or delete snapshots; primarily used during server maintenance routines
@@ -19,8 +19,8 @@ Import-Module -Name "VMware.VimAutomation.Core"
 
 ############### Functions ############### 
 function PromptEnviroment() {
-    $Title = "GMS Enviroment"
-    $Info = "Please select the enviroment to manage snapshots"
+    $Title = "GMS Environment"
+    $Info = "Please select the environment to manage snapshots"
     $options = [System.Management.Automation.Host.ChoiceDescription[]] @("&Production", "&Lab", "&Quit")
     [int]$defaultchoice = 2
     $opt = $host.UI.PromptForChoice($Title , $Info , $Options,$defaultchoice)
