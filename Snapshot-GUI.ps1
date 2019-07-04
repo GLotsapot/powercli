@@ -62,7 +62,7 @@ $VMAction = $null
 PromptEnviroment
 PromptAction
 
-if ($ServerName -and $VMListFile -and $VMAction) {
+if ($ServerName -and $VMListFile -and ($VMAction -ne $null)) {
     switch($VMAction)
     {
         0 {
