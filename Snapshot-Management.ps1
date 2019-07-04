@@ -35,6 +35,9 @@ Initial Commit
 
 Version 2.0
 Split GUI and functions
+
+Version 2.0.1
+- Changed ServerName and VMListFile to be manditory
 #>
 param (
     [Parameter(Mandatory=$True)]

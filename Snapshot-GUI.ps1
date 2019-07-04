@@ -17,8 +17,11 @@ Version 1.0
 Initial Commit
 
 Version 2.0
-Split GUI and functions
-Fixed some spelling mistakes
+- Split GUI and functions
+- Fixed some spelling mistakes
+
+Version 2.0.1
+- Fixed bad boolean check
 #>
 ############### Functions ############### 
 function PromptEnviroment() {
