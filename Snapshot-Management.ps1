@@ -37,7 +37,9 @@ Version 2.0
 Split GUI and functions
 #>
 param (
+    [Parameter(Mandatory=$True)]
 	[string]$ServerName = $null,
+    [Parameter(Mandatory=$True)]
 	[string]$VMListFile = $null,
     [switch]$Create = $false,
     [switch]$Delete = $false
