@@ -1,3 +1,4 @@
+# These are server in the GMS LAB Enviroment
 ONGMSCMPTE01
 ONGMSCMPTE02
 ONGMSCMPTD01

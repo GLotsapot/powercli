@@ -1,3 +1,4 @@
+# These are server in the GMS LAB Enviroment
 ONGMSCMPAP01
 ONGMSCMPAP02
 ONGMSCMPDB01
