@@ -52,25 +52,42 @@ Import-Module -Name "VMware.VimAutomation.Core"
 
 ############### Functions ############### 
 function SnapShotCreate(){
-    foreach($vm in Get-VM $VMlist) {
+    foreach($vm in Get-VM -Name @(GetServerList)) {
         Write-Host "Creating Snapshot for $($vm.name)"
-        New-Snapshot -VM $vm -Memory:$false -Name "$($vm.Name)_BEFOREPATCH" -description "$($vmserver.User) Patching"
+        New-Snapshot -VM $vm -Memory:$false -Name "$(Get-Date -Format s) Patching" -description "$($vmserver.User) created a snapshot"
     }
 }
 
 function SnapShotDelete() {
-    foreach($vm in Get-VM $VMlist) {
+    foreach($vm in Get-VM -Name @(GetServerList)) {
         Write-Host "Deleting Snapshot for $($vm.name)"
         Get-Snapshot -VM $vm |
         Remove-Snapshot -RemoveChildren:$true -Confirm:$false
     }
 }
 
+function GetServerList() {
+    $serverlist = @()
+    foreach($enty in Get-Content -Path:$VMListFile) {
+        if ($enty.Trim() -eq "") {
+            # Ignore the line cause it's blank
+        }
+        elseif ($enty.SubString(0,1) -eq "#") {
+            # Ignore the line cause it's a comment
+        }
+        else {
+            # Line isn't a comment or blank, must be a server
+            $serverlist += $enty
+        }
+    }
+    return $serverlist
+}
+
 ############### Main Program ############### 
 
-$VMlist = Get-Content -Path:$VMListFile
 $vmserver = Connect-VIServer -Server $ServerName -Protocol https
 
+# Delete before Create allows the user to use both parameters to ensure all existing snapshots are deleted before creating new ones
 if ($Delete) { 
     Write-Host "[Deleting Snapshots]" -BackgroundColor Green -ForegroundColor Yellow
     SnapShotDelete 
