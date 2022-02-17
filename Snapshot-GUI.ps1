@@ -34,11 +34,11 @@ function PromptEnviroment() {
     {
         0 { 
             $Script:ServerName = "ONTORVMM02.BLACKJACK.GCGAMING.COM"
-            $Script:VMListFile = "ServersProd.txt"
+            $Script:VMListFile = "..\GMS-Servers\OGELP\Production.txt"
             }
         1 { 
             $Script:ServerName = "ONBRMVMM01.blackjack.gcgaming.com"
-            $Script:VMListFile = "ServersLab.txt"
+            $Script:VMListFile = "..\GMS-Servers\OGELP\Lab.txt"
             }
         2 { 
             Write-Host "Good Bye!!!" -ForegroundColor Green 
