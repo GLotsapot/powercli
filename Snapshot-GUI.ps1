@@ -22,28 +22,31 @@ Version 2.0
 
 Version 2.0.1
 - Fixed bad boolean check
+
+Version 2.0.2
+- Rearranged Enviroment options to allow for easier addition of more enviroments
 #>
 ############### Functions ############### 
 function PromptEnviroment() {
     $Title = "GMS Environment"
     $Info = "Please select the environment to manage snapshots"
-    $options = [System.Management.Automation.Host.ChoiceDescription[]] @("&Production", "&Lab", "&Quit")
-    [int]$defaultchoice = 2
-    $opt = $host.UI.PromptForChoice($Title , $Info , $Options,$defaultchoice)
+    $Options = [System.Management.Automation.Host.ChoiceDescription[]] @("&Quit", "&Production", "&Lab")
+    [int]$DefaultChoice = 0
+    $opt = $host.UI.PromptForChoice($Title , $Info , $Options, $DefaultChoice)
     switch($opt)
     {
         0 { 
-            $Script:ServerName = "ONTORVMM02.BLACKJACK.GCGAMING.COM"
-            $Script:VMListFile = "..\GMS-Servers\OGELP\Production.txt"
-            }
-        1 { 
-            $Script:ServerName = "ONBRMVMM01.blackjack.gcgaming.com"
-            $Script:VMListFile = "..\GMS-Servers\OGELP\Lab.txt"
-            }
-        2 { 
             Write-Host "Good Bye!!!" -ForegroundColor Green 
             Return
         }
+        1 { 
+            $Script:ServerName = "ONTORVMM02.BLACKJACK.GCGAMING.COM"
+            $Script:VMListFile = "..\GMS-Servers\OGELP\Production.txt"
+            }
+        2 { 
+            $Script:ServerName = "ONBRMVMM01.blackjack.gcgaming.com"
+            $Script:VMListFile = "..\GMS-Servers\OGELP\Lab.txt"
+            }
     }
 }
 
@@ -51,12 +54,14 @@ function PromptAction() {
     # Select What To Do
     $Title = "Snapshot Action"
     $Info = "How would you like to process snapshots"
-    $options = [System.Management.Automation.Host.ChoiceDescription[]] @("&Create", "&Delete", "&Quit")
-    [int]$defaultchoice = 2
-    $Script:VMAction = $host.UI.PromptForChoice($Title , $Info , $Options,$defaultchoice)
+    $Options = [System.Management.Automation.Host.ChoiceDescription[]] @("&Create", "&Delete", "&Quit")
+    [int]$DefaultChoice = 2
+    $Script:VMAction = $host.UI.PromptForChoice($Title , $Info , $Options, $DefaultChoice)
 }
 
 ############### Main Program ############### 
+
+Clear-Host
 
 $ServerName = $null
 $VMListFile = $null
